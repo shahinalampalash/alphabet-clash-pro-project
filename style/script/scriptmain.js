@@ -2,6 +2,13 @@
 function handleKeyBoardButtonPress(event) {
     // ki press korsi
     const playerPressed = event.key;
+
+    // stop the game 
+   if(playerPressed === 'Escape'){
+    gameOver();
+   }
+
+
     //    ki press korte bolse
     const currentAlphabetElement = document.getElementById('current-alphabet')
     const alphabetElement = currentAlphabetElement.innerText;
@@ -18,9 +25,13 @@ function handleKeyBoardButtonPress(event) {
         continueGame()
     }
     else {
-      const currentLife = getElementByValue('current-life');
-      const updateLife = currentLife -1 ;
-      setTextElementById('current-life',updateLife)
+        const currentLife = getElementByValue('current-life');
+        const updateLife = currentLife - 1;
+        setTextElementById('current-life', updateLife)
+
+        if (updateLife === 0) {
+            gameOver();
+        }
     }
 
 
@@ -42,6 +53,22 @@ function continueGame() {
 
 function play() {
     hideElement('home-part');
+    hideElement('score-parts-section')
     showElement('playground-part')
+
+    setTextElementById('current-life', 5)
+    setTextElementById('current-score', 0)
+
     continueGame()
+}
+function gameOver() {
+    hideElement('playground-part');
+    showElement('score-parts-section');
+
+    //    update final score
+    const lastScore = getElementByValue('current-score');
+       setTextElementById('show-score', lastScore);
+    
+       const currentAlphabet = getElementByTextId('current-alphabet')
+       hideBackgroundColorById(currentAlphabet)
 }

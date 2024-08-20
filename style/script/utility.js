@@ -23,6 +23,14 @@ function getElementByValue(elementId){
     return value;
 }
 
+// text color game shesh kore hide korte
+
+function getElementByTextId(elementId){
+    const element = document.getElementById(elementId);
+    const text = element.innerText;
+    return text;
+}
+
 function setTextElementById(elementId, value){
     const element = document.getElementById(elementId);
     element.innerText = value;
